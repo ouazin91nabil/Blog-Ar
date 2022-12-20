@@ -1,0 +1,8 @@
+html, body{
+    direction: rtl;
+    text-align: right;
+}
+
+.dropdown-menu .dropdown-item{
+    text-align: right;
+}
