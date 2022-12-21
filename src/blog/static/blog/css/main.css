@@ -6,3 +6,8 @@ html, body{
 .dropdown-menu .dropdown-item{
     text-align: right;
 }
+/* start post content */
+.post{
+  border: 1px solid #ccc;
+}
+/* end post */
