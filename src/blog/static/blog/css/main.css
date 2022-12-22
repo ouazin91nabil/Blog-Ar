@@ -2,6 +2,9 @@ html, body{
     direction: rtl;
     text-align: right;
 }
+a{
+  text-decoration:none;
+}
 
 .dropdown-menu .dropdown-item{
     text-align: right;
@@ -11,3 +14,7 @@ html, body{
   border: 1px solid #ccc;
 }
 /* end post */
+.comment{
+  border: 1px dashed #ccc;
+  background-color: #f8f8f8;
+}

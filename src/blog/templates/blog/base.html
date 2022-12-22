@@ -4,7 +4,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    {% if title %}
+    <title>مدونة | {{title}}</title>
+    {% else %}
+    <title>مدونة</title>
+    {% endif %}
     <link href="{% static 'blog/css/fontawesome.min.css' %}">
     <link href="{% static 'blog/css/bootstrap.min.css' %}" rel="stylesheet" >
     <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
@@ -23,10 +27,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">الرئيسية</a>
+		<a class="nav-link active" aria-current="page" href="{% url 'home' %}">الرئيسية</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">من انا</a>
+		<a class="nav-link" href="{% url 'about' %}">من انا</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,23 +61,11 @@
 	<div class="col-md-4">
 	  <div class="card mb-3">
 	    <h3 class="text-center bg-secondary text light p-2">اخر التدوينات</h3>
-	    <ul>
-	      <li><a href="#">التدوينة الاولى</a></li>
-	      <li><a href="#">التدوينة الثانية</a></li>
-	      <li><a href="#">التدوينة الثالثة</a></li>
-	      <li><a href="#">التدوينة الرابعة</a></li>
-	      <li><a href="#">التدوينة الخامسة</a></li>
-	    </ul>
+	    {% include 'blog/latest_posts.html' %} 
 	  </div>
 	  <div class="card mb-3">
 	    <h3 class="text-center bg-secondary text light p-2">اخر التعليقات</h3>
-	    <ul>
-	      <li><a href="#">التعليق الاول</a></li>
-	      <li><a href="#">التعليق الثاني</a></li>
-	      <li><a href="#">التعليق الثالث</a></li>
-	      <li><a href="#">التعليق الرابع</a></li>
-	      <li><a href="#">التعليق الخامس</a></li>
-	    </ul>
+	    {% include 'blog/latest_comments.html' %} 
 	  </div>
 
 	</div>
