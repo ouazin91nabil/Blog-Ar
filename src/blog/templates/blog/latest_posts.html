@@ -1,7 +1,9 @@
 <ul class="list-group list-group-flush">
-  {% for post in posts %}
+  {% for post in l_posts %}
   <li class="list-group-item">
     <a class="text-dark" href="{% url 'detail' post.pk %}">{{post.title}}</a>
   </li>
+  {% empty %}
+  <li class="border p-4 m-2">لاتوجد حاليا أية تدوينة</li>
   {% endfor %}
 </ul>

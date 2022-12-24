@@ -1,6 +1,13 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+  {{message}}
+</div>
+{% endfor %}
+{% endif %}
 {% for post in posts %}
 <div class="post border p-3 mb-3">
 	<img class="img-fluid border rounded-circle m-2" src="{% static 'blog/images/user.png' %}" alt="صورة الناشر" width="70px">
