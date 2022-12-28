@@ -2,14 +2,18 @@ from django.shortcuts import render, redirect
 from .forms import UserCreationForm, LoginForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from blog.models import Post
+from django.contrib.auth.decorators import login_required
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            messages.success(request, f'تهانينا {username} لقد تمت عملية التسجيل بنجاح.')
-            return redirect('home')
+            new_user = form.save(commit=False)
+            # username = form.cleaned_data['username']
+            new_user.set_password(form.cleaned_data['password1'])
+            new_user.save()
+            messages.success(request, f'تهانينا {new_user} لقد تمت عملية التسجيل بنجاح.')
+            return redirect('login')
 
     else:
         form = UserCreationForm()
@@ -27,7 +31,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('profile')
         else:
             messages.warning(request, 'هناك خطأ في إسم المستخدم أو كلمة المرور')
 
@@ -48,7 +52,10 @@ def logout_user(request):
     return render(request, 'user/logout.html', context)
 
 
-
+@login_required(login_url='login')
 def profile(request):
+    posts = Post.objects.filter(author=request.user)
     return render(request, 'user/profile.html', {
-        'title': 'الملف الشخصي',})
+        'title': 'الملف الشخصي',
+        'posts': posts,
+        })
